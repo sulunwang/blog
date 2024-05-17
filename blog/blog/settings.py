@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,6 +124,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+# 配置静态文件加载路径
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
 #redis配置
 CACHES = {
     "default": { # 默认
@@ -171,7 +177,7 @@ LOGGING = {
         'file': {  # 向文件中输出日志
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/blog.log'),  # 日志文件的位置
+            'filename': os.path.join(BASE_DIR, 'logs/myblog.log'),  # 日志文件的位置
             'maxBytes': 300 * 1024 * 1024,
             'backupCount': 10,
             'formatter': 'verbose'
